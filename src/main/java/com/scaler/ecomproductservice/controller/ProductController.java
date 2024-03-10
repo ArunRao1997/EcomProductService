@@ -3,7 +3,7 @@ package com.scaler.ecomproductservice.controller;
 import com.scaler.ecomproductservice.dto.ProductListResponseDTO;
 import com.scaler.ecomproductservice.dto.ProductRequestDTO;
 import com.scaler.ecomproductservice.dto.ProductResponseDTO;
-import com.scaler.ecomproductservice.model.Product;
+import com.scaler.ecomproductservice.exception.ProductNotFoundException;
 import com.scaler.ecomproductservice.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -16,19 +16,20 @@ public class ProductController {
     private final ProductService productService; // immutable
 
     //@Autowired is optional for constructor injection starting Spring 4.x
-    public ProductController( @Qualifier("/fakeStoreProductService") ProductService productService) {
+    @Autowired
+    public ProductController(@Qualifier("fakeStoreProductService") ProductService productService) {
         this.productService = productService;
     }
 
     /*
-    Fielld Injection
+    Field Injection
      */
 //    @Autowired
 //    @Qualifier("/fakeStoreProductService")
 //    private ProductService productService;
 
     @GetMapping("/product/{id}")
-    public ResponseEntity getProductById(@PathVariable("id") int id) {
+    public ResponseEntity getProductById(@PathVariable("id") int id) throws ProductNotFoundException {
         ProductResponseDTO response = productService.getProductById(id);
         return ResponseEntity.ok(response);
     }
@@ -58,13 +59,13 @@ public class ProductController {
     }
 
     @PostMapping("/products")
-    public ResponseEntity createProducts(@RequestBody ProductRequestDTO productRequestDTO){
+    public ResponseEntity createProducts(@RequestBody ProductRequestDTO productRequestDTO) {
         ProductResponseDTO responseDTO = productService.createProduct(productRequestDTO);
         return ResponseEntity.ok(responseDTO);
     }
 
-    @DeleteMapping ("/product/{id}")
-    public ResponseEntity deleteProductById(@PathVariable("id") int id){
+    @DeleteMapping("/product/{id}")
+    public ResponseEntity deleteProductById(@PathVariable("id") int id) {
         boolean responseDTO = productService.deleteProduct(id);
         return ResponseEntity.ok(responseDTO);
     }

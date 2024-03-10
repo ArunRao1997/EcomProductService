@@ -3,13 +3,14 @@ package com.scaler.ecomproductservice.service;
 import com.scaler.ecomproductservice.dto.ProductListResponseDTO;
 import com.scaler.ecomproductservice.dto.ProductRequestDTO;
 import com.scaler.ecomproductservice.dto.ProductResponseDTO;
+import com.scaler.ecomproductservice.exception.ProductNotFoundException;
 import com.scaler.ecomproductservice.model.Product;
 
 
 public interface ProductService {
     ProductListResponseDTO getAllProducts();
 
-    ProductResponseDTO getProductById(int id);
+    ProductResponseDTO getProductById(int id) throws ProductNotFoundException;
 
     ProductResponseDTO createProduct(ProductRequestDTO productRequestDTO);
 
