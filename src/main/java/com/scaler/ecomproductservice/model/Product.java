@@ -1,13 +1,18 @@
 package com.scaler.ecomproductservice.model;
 
-import lombok.Data;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-public class Product {
-    private int id;
+@Getter
+@Setter
+@Entity
+public class Product extends BaseModel{
     private String title;
     private double price;
-    private String category;
     private String description;
     private String image;
+    @ManyToOne
+    private Category category;
 }
