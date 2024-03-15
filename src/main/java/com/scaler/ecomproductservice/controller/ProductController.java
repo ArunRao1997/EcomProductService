@@ -17,7 +17,7 @@ public class ProductController {
 
     //@Autowired is optional for constructor injection starting Spring 4.x
     @Autowired
-    public ProductController(@Qualifier("fakeStoreProductService") ProductService productService) {
+    public ProductController(@Qualifier("productService") ProductService productService) {
         this.productService = productService;
     }
 
@@ -34,6 +34,11 @@ public class ProductController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/product/title/{title}")
+    public ResponseEntity getProductByTitle(@PathVariable("title") String title) throws ProductNotFoundException {
+        ProductResponseDTO response = productService.findProductByTitle(title);
+        return ResponseEntity.ok(response);
+    }
     @GetMapping("/products")
     public ResponseEntity getAllProducts() {
         ProductListResponseDTO response = productService.getAllProducts();

@@ -17,4 +17,6 @@ public interface ProductService {
     boolean deleteProduct(int id);
 
     Product updateProduct(int id, Product updateProduct);
+
+    ProductResponseDTO findProductByTitle(String title);
 }

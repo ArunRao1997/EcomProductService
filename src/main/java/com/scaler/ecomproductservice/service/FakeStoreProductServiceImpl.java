@@ -69,4 +69,9 @@ public class FakeStoreProductServiceImpl implements ProductService {
     public Product updateProduct(int id, Product updateProduct) {
         return null;
     }
+
+    @Override
+    public ProductResponseDTO findProductByTitle(String title) {
+        return null;
+    }
 }
