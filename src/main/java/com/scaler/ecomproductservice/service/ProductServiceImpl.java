@@ -3,6 +3,8 @@ package com.scaler.ecomproductservice.service;
 import com.scaler.ecomproductservice.dto.ProductListResponseDTO;
 import com.scaler.ecomproductservice.dto.ProductRequestDTO;
 import com.scaler.ecomproductservice.dto.ProductResponseDTO;
+import com.scaler.ecomproductservice.exception.InvalidTitleException;
+import com.scaler.ecomproductservice.exception.ProductNotFoundException;
 import com.scaler.ecomproductservice.mapper.ProductMapper;
 import com.scaler.ecomproductservice.model.Product;
 import com.scaler.ecomproductservice.repository.ProductRepository;
@@ -45,8 +47,14 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public ProductResponseDTO findProductByTitle(String title) {
+    public ProductResponseDTO findProductByTitle(String title) throws ProductNotFoundException {
+        if(title == null || title.isEmpty()){
+            throw new InvalidTitleException("title is invalid");
+        }
         Product product = productRepository.findProductByTitle(title);
+        if(product == null){
+            throw new ProductNotFoundException("Product with given title is not available");
+        }
         return ProductMapper.convertProductToProductResponseDTO(product);
     }
 }

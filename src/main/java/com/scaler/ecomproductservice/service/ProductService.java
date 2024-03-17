@@ -18,5 +18,5 @@ public interface ProductService {
 
     Product updateProduct(int id, Product updateProduct);
 
-    ProductResponseDTO findProductByTitle(String title);
+    ProductResponseDTO findProductByTitle(String title) throws ProductNotFoundException;
 }
