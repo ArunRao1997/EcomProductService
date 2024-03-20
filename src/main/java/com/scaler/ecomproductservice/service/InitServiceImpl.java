@@ -11,7 +11,6 @@ import com.scaler.ecomproductservice.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 @Service
 public class InitServiceImpl implements InitService {
     private ProductRepository productRepository;
@@ -90,7 +89,7 @@ public class InitServiceImpl implements InitService {
         ps5 = productRepository.save(ps5);
 
         Order order = new Order();
-        order.setProducts(List.of(iPhone,macBook,watch,ps5));
+        order.setProducts(List.of(iPhone, macBook, watch, ps5));
         orderRepository.save(order);
 
 

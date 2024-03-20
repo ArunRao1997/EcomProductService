@@ -8,12 +8,14 @@ import com.scaler.ecomproductservice.exception.ProductNotFoundException;
 import com.scaler.ecomproductservice.mapper.ProductMapper;
 import com.scaler.ecomproductservice.model.Product;
 import com.scaler.ecomproductservice.repository.ProductRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service("productService")
 public class ProductServiceImpl implements ProductService{
+
     private ProductRepository productRepository;
 
     public ProductServiceImpl(ProductRepository productRepository) {
